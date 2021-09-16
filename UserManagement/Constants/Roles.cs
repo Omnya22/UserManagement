@@ -1,4 +1,4 @@
-﻿namespace UserManagement.Constans
+﻿namespace UserManagement.Constants
 {
     public enum Roles
     {

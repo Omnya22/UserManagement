@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UserManagement.Constans
+namespace UserManagement.Constants
 {
     public static class Permissions
     {

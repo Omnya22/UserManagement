@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+	ViewData["Title"] = "Users";
+}
+<h1>Users</h1>
+@*<button type="button" class="btn btn-primary mb-2">Add New Role</button>*@
+@*<partial name="_RoleForm" model="new RoleViewModel()" />*@
+<table class="table table-striped table-bordered ">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">User Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Role</th>
+			<th scope="col">Option</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>@item.FName</td>
+			<td>@item.LName</td>
+			<td>@item.UserName</td>
+			<td>@item.Email</td>
+			<td>@string.Join(" , ", item.Roles.ToList())</td>
+			<td>
+				<a class="btn btn-success" asp-controller="Users" asp-action="ManageRole" asp-route-userId="@item.Id">Manage Role</a>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

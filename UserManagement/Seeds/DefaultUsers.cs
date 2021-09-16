@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using UserManagement.Constans;
+using UserManagement.Constants;
 using UserManagement.Models;
 
 namespace UserManagement.Seeds
@@ -34,7 +34,7 @@ namespace UserManagement.Seeds
             {
                 FName = "Admin",
                 LName = "Admin",
-                UserName = "Admin User",
+                UserName = "AdminUser",
                 Email = "admin@user.com"
             };
 
@@ -52,7 +52,7 @@ namespace UserManagement.Seeds
             {
                 FName = "SuperAdmin",
                 LName = "SuperAdmin",
-                UserName = "SuperAdmin User",
+                UserName = "SuperAdminUser",
                 Email = "superadmin@user.com"
             };
 
