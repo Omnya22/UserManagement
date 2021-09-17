@@ -27,5 +27,13 @@ namespace UserManagement.Constants
 
             return allPermissions;
         }
+
+        public static class Products
+        {
+            public const string View = "Permissions.Product.View";
+            public const string Create = "Permissions.Product.Create";
+            public const string Edit = "Permissions.Product.Edit";
+            public const string Delete = "Permissions.Product.Delete";
+        }
     }
 }

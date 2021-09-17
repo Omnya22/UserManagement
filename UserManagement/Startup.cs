@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -5,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using UserManagement.Data;
+using UserManagement.Filters;
 using UserManagement.Models;
 
 namespace UserManagement
@@ -22,6 +25,10 @@ namespace UserManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -43,6 +50,10 @@ namespace UserManagement
 
             services.AddControllersWithViews();
 
+            services.Configure<SecurityStampValidatorOptions>(options=> 
+            {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
