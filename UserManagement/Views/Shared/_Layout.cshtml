@@ -24,9 +24,13 @@
 						</li>
 						@if (User.IsInRole(Roles.SuperAdmin.ToString()))
 						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-controller="Users" asp-action="Index">Users</a>
-							</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Users" asp-action="Index">Users</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Roles" asp-action="Index">Roles</a>
+								</li>
 						}
 					</ul>
 					<partial name="_LoginPartial" />
