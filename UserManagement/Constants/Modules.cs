@@ -3,6 +3,7 @@
     public enum Modules
     {
         Product,
-        Order
+        Stock,
+        Categories
     }
 }

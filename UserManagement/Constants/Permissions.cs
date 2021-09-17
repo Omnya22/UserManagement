@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace UserManagement.Constants
 {
@@ -13,6 +14,18 @@ namespace UserManagement.Constants
                 $"Permissions.{module}.Edit",
                 $"Permissions.{module}.Delete",
             }; 
+        }
+
+        public static List<string> GenerateAllPermissions()
+        {
+            var allPermissions = new List<string>();
+
+            var modules = Enum.GetValues(typeof(Modules));
+
+            foreach (var module in modules)
+                allPermissions.AddRange(GeneratePermissions(module.ToString()));
+
+            return allPermissions;
         }
     }
 }

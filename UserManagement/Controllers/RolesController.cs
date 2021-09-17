@@ -48,53 +48,53 @@ namespace UserManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public async Task<IActionResult> ManagePermissions(string roleId)
-        //{
-        //    var role = await _roleManager.FindByIdAsync(roleId);
+        public async Task<IActionResult> ManagePermissions(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
 
-        //    if (role == null)
-        //        return NotFound();
+            if (role == null)
+                return NotFound();
 
-        //    var roleClaims = _roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
-        //    var allClaims = Permissions.GeneratePermissions();
-        //    var allPermissions = allClaims.Select(p => new RolesManagedViewModel { RoleName = p }).ToList();
+            var roleClaims = _roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
+            var allClaims = Permissions.GenerateAllPermissions();
+            var allPermissions = allClaims.Select(p => new CheckBoxViewModel { Value = p }).ToList();
 
-        //    foreach (var permission in allPermissions)
-        //    {
-        //        if (roleClaims.Any(c => c == permission.RoleName))
-        //            permission.IsSelected = true;
-        //    }
+            foreach (var permission in allPermissions)
+            {
+                if (roleClaims.Any(c => c == permission.Value))
+                    permission.IsSelected = true;
+            }
 
-        //    var viewModel = new PermissionsFormViewModel
-        //    {
-        //        RoleId = roleId,
-        //        RoleName = role.Name,
-        //        RoleCalims = allPermissions
-        //    };
+            var viewModel = new FormViewModel
+            {
+                Id = roleId,
+                Name = role.Name,
+                Items = allPermissions
+            };
 
-        //    return View(viewModel);
-        //}
+            return View(viewModel);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ManagePermissions(PermissionsFormViewModel model)
-        //{
-        //    var role = await _roleManager.FindByIdAsync(model.RoleId);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManagePermissions(FormViewModel model)
+        {
+            var role = await _roleManager.FindByIdAsync(model.Id);
 
-        //    if (role == null)
-        //        return NotFound();
+            if (role == null)
+                return NotFound();
 
-        //    var roleClaims = await _roleManager.GetClaimsAsync(role);
+            var roleClaims = await _roleManager.GetClaimsAsync(role);
 
-        //    foreach (var claim in roleClaims)
-        //        await _roleManager.RemoveClaimAsync(role, claim);
+            foreach (var claim in roleClaims)
+                await _roleManager.RemoveClaimAsync(role, claim);
 
-        //    var selectedClaims = model.RoleCalims.Where(c => c.IsSelected).ToList();
+            var selectedClaims = model.Items.Where(c => c.IsSelected).ToList();
 
-        //    foreach (var claim in selectedClaims)
-        //        await _roleManager.AddClaimAsync(role, new Claim("Permission", claim.RoleName));
+            foreach (var claim in selectedClaims)
+                await _roleManager.AddClaimAsync(role, new Claim("Permission", claim.Value));
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

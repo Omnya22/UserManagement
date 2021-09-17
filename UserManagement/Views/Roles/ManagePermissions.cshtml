@@ -1,25 +1,38 @@
 ﻿@model FormViewModel
 
-@{ ViewData["Title"] = "Manage Roles"; }
+@{ ViewData["Title"] = "Manage Permissions"; }
 
-<form asp-action="UpdateRoles" method="post">
+<form method="post" asp-action="ManagePermissions" >
 	<div class="card mt-4">
 		<div class="card-header">
 			<h2>@Model.Name</h2>
-			Add/Remove Roles
+			Add/Remove Permissions
 		</div>
 		<div class="card-body">
 			<input type="hidden" asp-for="Id" />
-			@for (int i = 0; i < Model.Items.Count; i++)
-			{
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Module</th>
+						<th>Permission</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.Items.Count; i++)
+					{
+		<tr>
+			<td>
 				<div class="form-check m-1">
 					<input type="hidden" asp-for="@Model.Items[i].Value" />
 					<input asp-for="@Model.Items[i].IsSelected" class="form-check-input" />
-					<label class="form-check-label" asp-for="@Model.Items[i].IsSelected">
-						@Model.Items[i].Value
-					</label>
 				</div>
-			}
+			</td>
+			<td>@Model.Items[i].Value.Split('.')[1]</td>
+			<td>@Model.Items[i].Value.Split('.')[2]</td>
+		</tr>}
+				</tbody>
+			</table>
 			<div asp-validation-summary="All" class="text-danger"></div>
 		</div>
 		<div class="card-footer">

@@ -47,13 +47,13 @@ namespace UserManagement.Controllers
 
             var roles = await _roleManager.Roles.ToListAsync();
 
-            var model = new UsersRoleViewModel
+            var model = new FormViewModel
             {
-                UserId = user.Id,
-                UserName = user.UserName,
-                Roles = roles.Select(role => new RolesManagedViewModel
+                Id = user.Id,
+                Name = user.UserName,
+                Items = roles.Select(role => new CheckBoxViewModel
                 {
-                    RoleName = role.Name,
+                    Value = role.Name,
                     IsSelected = _userManager.IsInRoleAsync(user, role.Name).Result
                 }).ToList()
             };
@@ -63,9 +63,9 @@ namespace UserManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateRoles(UsersRoleViewModel model)
+        public async Task<IActionResult> UpdateRoles(FormViewModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.UserId);
+            var user = await _userManager.FindByIdAsync(model.Id);
 
             if (user == null)
                 return NotFound();
@@ -73,7 +73,7 @@ namespace UserManagement.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             await _userManager.RemoveFromRolesAsync(user, userRoles);
-            await _userManager.AddToRolesAsync(user, model.Roles.Where(r => r.IsSelected).Select(r => r.RoleName));
+            await _userManager.AddToRolesAsync(user, model.Items.Where(r => r.IsSelected).Select(r => r.Value));
 
             return RedirectToAction(nameof(Index));
         }

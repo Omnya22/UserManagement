@@ -1,8 +1,8 @@
 ﻿namespace UserManagement.ViewModels
 {
-    public class RolesManagedViewModel
+    public class CheckBoxViewModel
     {
-        public string RoleName { get; set; }
+        public string Value { get; set; }
 
         public bool IsSelected { get; set; }
     }
