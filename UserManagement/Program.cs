@@ -10,6 +10,8 @@ namespace UserManagement
     public class Program
     {
         //**Changes from Dev Branch**//
+        //squad merge comment one
+        //squad merge comment two
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
