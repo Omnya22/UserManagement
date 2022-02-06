@@ -19,7 +19,7 @@ namespace UserManagement
 
             try
             {
-                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
                 await Seeds.DefaultRoles.SeedAsync(roleManager);

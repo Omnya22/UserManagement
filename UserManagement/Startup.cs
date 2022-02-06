@@ -35,7 +35,7 @@ namespace UserManagement
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(option=>
+            services.AddIdentity<AppUser, IdentityRole>(option=>
             {
                 option.Password.RequireDigit = false;
                 option.Password.RequireLowercase = false;
