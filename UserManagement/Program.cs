@@ -9,9 +9,6 @@ namespace UserManagement
 {
     public class Program
     {
-        //**Changes from Dev Branch**//
-        //squad merge comment one
-        //squad merge comment two
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -21,7 +18,7 @@ namespace UserManagement
 
             try
             {
-                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
                 await Seeds.DefaultRoles.SeedAsync(roleManager);

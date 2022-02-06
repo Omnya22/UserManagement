@@ -10,9 +10,9 @@ namespace UserManagement.Seeds
 {
     public static class DefaultUsers
     {
-        public static async Task SeedBasicUserAsync(UserManager<ApplicationUser> userManager)
+        public static async Task SeedBasicUserAsync(UserManager<AppUser> userManager)
         {
-            var defaultuser = new ApplicationUser
+            var defaultuser = new AppUser
             {
                  FName = "User",
                  LName = "User",
@@ -28,9 +28,9 @@ namespace UserManagement.Seeds
             }
         }
 
-        public static async Task SeedAdminUserAsync(UserManager<ApplicationUser> userManager)
+        public static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
         {
-            var defaultuser = new ApplicationUser
+            var defaultuser = new AppUser
             {
                 FName = "Admin",
                 LName = "Admin",
@@ -46,9 +46,9 @@ namespace UserManagement.Seeds
             }
         }
 
-        public static async Task SeedSuperAdminUserAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedSuperAdminUserAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var defaultuser = new ApplicationUser
+            var defaultuser = new AppUser
             {
                 FName = "SuperAdmin",
                 LName = "SuperAdmin",
